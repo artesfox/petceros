@@ -70,6 +70,10 @@
   var slides = $$('.slide');
   var dots = $$('.slider-dots button');
   var current = 0, timer = null;
+  var SLIDE_MS = 4000; // tiempo entre diapositivas (antes 5500)
+  // Activa el zoom de la primera imagen apenas carga la página
+  var slidesWrap = $('.slides');
+  requestAnimationFrame(function () { requestAnimationFrame(function () { slidesWrap.classList.add('is-ready'); }); });
   function goTo(i) {
     slides[current].classList.remove('is-active');
     dots[current].classList.remove('is-active');
@@ -77,7 +81,7 @@
     slides[current].classList.add('is-active');
     dots[current].classList.add('is-active');
   }
-  function play() { stop(); timer = setInterval(function () { goTo(current + 1); }, 5500); }
+  function play() { stop(); timer = setInterval(function () { goTo(current + 1); }, SLIDE_MS); }
   function stop() { if (timer) clearInterval(timer); }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); play(); }); });
   // swipe en móvil
