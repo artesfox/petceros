@@ -124,8 +124,10 @@ p { margin: 0 0 1em; }
   background-size: cover; background-position: center;
   opacity: 0;
   transform: scale(1.08);
-  transition: opacity 1.2s ease, transform 7s linear;
+  transition: opacity .8s ease, transform 5s linear;
 }
+/* La primera imagen arranca ampliada y hace zoom al cargar, igual que las demás */
+.js .slides:not(.is-ready) .slide.is-active { transform: scale(1.08); transition: none; }
 .slide.is-active { opacity: 1; transform: scale(1); }
 .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,.05) 55%, transparent 100%); }
 .hero-inner { position: relative; z-index: 2; padding-top: 56px; }
@@ -539,6 +541,23 @@ p { margin: 0 0 1em; }
   .slots { width: 100%; max-width: 310px; }
   .slots-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 6px; }
   .wa { width: 52px; height: 52px; left: 14px; bottom: 16px; }
+}
+
+/* =========================================================
+   ENTRADA DEL LOGO
+   ========================================================= */
+.hero-logo { animation: logo-entrada 1.3s var(--ease) .15s both; transform-origin: 50% 60%; }
+.header-logo img { animation: logo-pop .8s var(--ease) .1s both; }
+@keyframes logo-entrada {
+  0%   { opacity: 0; transform: scale(.3) rotate(-14deg); }
+  55%  { opacity: 1; transform: scale(1.1) rotate(5deg); }
+  75%  { transform: scale(.96) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes logo-pop {
+  0%   { opacity: 0; transform: scale(.5); }
+  70%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
